@@ -1,0 +1,110 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Service", "IdentityServer.Service\IdentityServer.Service.csproj", "{D79FB035-658C-462A-8CC0-4076BA14AF56}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Service", "1 - Service", "{150A5839-FA46-4796-B7A8-35056B1E12EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{F123FA39-72B5-4C0B-8642-5391E25FA02A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{898BC8FF-7271-4EDB-AA64-E320153C86BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{89CC4C9C-E79C-481A-94E2-46078FBECB38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Test", "5 - Test", "{F8CAAE7A-CAE4-4F78-94C0-B67ADAB345DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Application", "IdentityServer.Application\IdentityServer.Application.csproj", "{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Application.Core", "IdentityServer.Application.Core\IdentityServer.Application.Core.csproj", "{E4AA76BB-FFAB-4212-B528-6B48A3A912A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - IoC", "4.1 - IoC", "{F30E31E7-86D8-45A9-A8BA-70DE7E93D3A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Infra.IoC", "IdentityServer.Infra.IoC\IdentityServer.Infra.IoC.csproj", "{BD567061-B712-41FC-8E85-A355B7FF70E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Domain.Core", "IdentityServer.Domain.Core\IdentityServer.Domain.Core.csproj", "{97F65683-6046-4361-AFC1-F1A287747FFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Domain", "IdentityServer.Domain\IdentityServer.Domain.csproj", "{836BDD7D-CDD4-4CD4-B789-458357B1B96C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - Data", "4.2 - Data", "{E26C2942-535A-474E-BA74-992A284D24DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.3 - CrossCutting", "4.3 - CrossCutting", "{8DEA548B-28F3-4C05-ACAD-1BF79D247891}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Infra.Data", "IdentityServer.Infra.Data\IdentityServer.Infra.Data.csproj", "{DC495DB5-279F-4CEE-9FC1-28982A06CC48}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Infra.CrossCutting", "IdentityServer.Infra.CrossCutting\IdentityServer.Infra.CrossCutting.csproj", "{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.Tests", "IdentityServer.Tests\IdentityServer.Tests.csproj", "{A06FDDAA-8643-444B-888C-66B70AC22956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.Application.Dto", "IdentityServer.Application.Dto\IdentityServer.Application.Dto.csproj", "{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D79FB035-658C-462A-8CC0-4076BA14AF56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D79FB035-658C-462A-8CC0-4076BA14AF56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D79FB035-658C-462A-8CC0-4076BA14AF56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D79FB035-658C-462A-8CC0-4076BA14AF56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4AA76BB-FFAB-4212-B528-6B48A3A912A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4AA76BB-FFAB-4212-B528-6B48A3A912A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4AA76BB-FFAB-4212-B528-6B48A3A912A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4AA76BB-FFAB-4212-B528-6B48A3A912A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD567061-B712-41FC-8E85-A355B7FF70E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD567061-B712-41FC-8E85-A355B7FF70E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD567061-B712-41FC-8E85-A355B7FF70E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD567061-B712-41FC-8E85-A355B7FF70E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F65683-6046-4361-AFC1-F1A287747FFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F65683-6046-4361-AFC1-F1A287747FFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F65683-6046-4361-AFC1-F1A287747FFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F65683-6046-4361-AFC1-F1A287747FFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{836BDD7D-CDD4-4CD4-B789-458357B1B96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836BDD7D-CDD4-4CD4-B789-458357B1B96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836BDD7D-CDD4-4CD4-B789-458357B1B96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836BDD7D-CDD4-4CD4-B789-458357B1B96C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC495DB5-279F-4CEE-9FC1-28982A06CC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC495DB5-279F-4CEE-9FC1-28982A06CC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC495DB5-279F-4CEE-9FC1-28982A06CC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC495DB5-279F-4CEE-9FC1-28982A06CC48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A06FDDAA-8643-444B-888C-66B70AC22956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A06FDDAA-8643-444B-888C-66B70AC22956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A06FDDAA-8643-444B-888C-66B70AC22956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A06FDDAA-8643-444B-888C-66B70AC22956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D79FB035-658C-462A-8CC0-4076BA14AF56} = {150A5839-FA46-4796-B7A8-35056B1E12EB}
+		{F3CA03CE-0C4E-4F51-BB0E-860F8E00B600} = {F123FA39-72B5-4C0B-8642-5391E25FA02A}
+		{E4AA76BB-FFAB-4212-B528-6B48A3A912A8} = {F123FA39-72B5-4C0B-8642-5391E25FA02A}
+		{F30E31E7-86D8-45A9-A8BA-70DE7E93D3A1} = {89CC4C9C-E79C-481A-94E2-46078FBECB38}
+		{BD567061-B712-41FC-8E85-A355B7FF70E3} = {F30E31E7-86D8-45A9-A8BA-70DE7E93D3A1}
+		{97F65683-6046-4361-AFC1-F1A287747FFA} = {898BC8FF-7271-4EDB-AA64-E320153C86BF}
+		{836BDD7D-CDD4-4CD4-B789-458357B1B96C} = {898BC8FF-7271-4EDB-AA64-E320153C86BF}
+		{E26C2942-535A-474E-BA74-992A284D24DD} = {89CC4C9C-E79C-481A-94E2-46078FBECB38}
+		{8DEA548B-28F3-4C05-ACAD-1BF79D247891} = {89CC4C9C-E79C-481A-94E2-46078FBECB38}
+		{DC495DB5-279F-4CEE-9FC1-28982A06CC48} = {E26C2942-535A-474E-BA74-992A284D24DD}
+		{B8E4A93F-58AD-4609-BA9B-E2641D9AABB4} = {8DEA548B-28F3-4C05-ACAD-1BF79D247891}
+		{A06FDDAA-8643-444B-888C-66B70AC22956} = {F8CAAE7A-CAE4-4F78-94C0-B67ADAB345DD}
+		{FDB8AF83-82FE-46BC-A16E-B50E0728C8DD} = {F123FA39-72B5-4C0B-8642-5391E25FA02A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A418FC9A-DC33-4326-B4A1-E3B479F14FB5}
+	EndGlobalSection
+EndGlobal

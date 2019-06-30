@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Canducci.MongoDB.Repository.Core" Version="1.1.1" />
+    <PackageReference Include="FluentValidation" Version="8.2.3" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer.Infra.CrossCutting\IdentityServer.Infra.CrossCutting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
+</Project>

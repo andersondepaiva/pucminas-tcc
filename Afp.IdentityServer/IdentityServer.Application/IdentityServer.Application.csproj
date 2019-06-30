@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer.Application.Core\IdentityServer.Application.Core.csproj" />
+    <ProjectReference Include="..\IdentityServer.Application.Dto\IdentityServer.Application.Dto.csproj" />
+    <ProjectReference Include="..\IdentityServer.Domain\IdentityServer.Domain.csproj" />
+    <ProjectReference Include="..\IdentityServer.Infra.Data\IdentityServer.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

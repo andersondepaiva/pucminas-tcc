@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Canducci.MongoDB.Repository.Core" Version="1.1.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer.Domain\IdentityServer.Domain.csproj" />
+    <ProjectReference Include="..\IdentityServer.Infra.CrossCutting\IdentityServer.Infra.CrossCutting.csproj" />
+  </ItemGroup>
+
+</Project>

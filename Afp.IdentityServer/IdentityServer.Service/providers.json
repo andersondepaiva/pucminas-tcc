@@ -1,0 +1,22 @@
+{
+  "Providers": {
+    "GoogleProviders": [
+      {
+        "Code": "google",
+        "DisplayName": "Google",
+        "AuthenticationScheme": "google",
+        "ClientId": "268002680294-3inn50dnhu636t8a4il81275s04go5a1.apps.googleusercontent.com",
+        "ClientSecret": "3d6DdAkB4tDBl7jnlKbN2JWZ"
+      }
+    ],
+    "FacebookProviders": [
+      {
+        "Code": "facebook",
+        "DisplayName": "Facebook",
+        "AuthenticationScheme": "facebook",
+        "ClientId": "448871739213579",
+        "ClientSecret": "16b2f036289065867b8daea7265683fe"
+      }
+    ]
+  }
+}
