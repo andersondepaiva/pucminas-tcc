@@ -1,0 +1,36 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26124.0
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "afp.gateway.services", "afp.gateway.services\afp.gateway.services.csproj", "{911CED3A-54DC-46CC-9CE2-48D040E1F343}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|x64.Build.0 = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Debug|x86.Build.0 = Debug|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|x64.ActiveCfg = Release|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|x64.Build.0 = Release|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|x86.ActiveCfg = Release|Any CPU
+		{911CED3A-54DC-46CC-9CE2-48D040E1F343}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67D2BC30-4E5F-4454-ADFE-B0C33EB5D801}
+	EndGlobalSection
+EndGlobal

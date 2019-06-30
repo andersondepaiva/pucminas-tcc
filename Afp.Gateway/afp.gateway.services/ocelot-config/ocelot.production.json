@@ -1,0 +1,9 @@
+{
+  "ReRoutes": [
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "GwRequestId",
+    "AdministrationPath": "/admin",
+    "ServiceDiscoveryProvider": { "Type": "Eureka" }
+  }
+}
