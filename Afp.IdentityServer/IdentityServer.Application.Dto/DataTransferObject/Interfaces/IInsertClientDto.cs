@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace IdentityServer.Application.Dto.Interfaces
 {
@@ -21,9 +19,5 @@ namespace IdentityServer.Application.Dto.Interfaces
         ICollection<string> AllowedScopes { get; set; }
 
         bool AllowOfflineAccess { get; set; }
-
-        CompanyDto Company { get; set; }
-
-        BrandDto Brand { get; set; }
     }
 }
