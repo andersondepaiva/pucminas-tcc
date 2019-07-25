@@ -1,9 +1,22 @@
 {
   "ReRoutes": [
+    {
+      "UpstreamPathTemplate": "/api/cadastro-ativos/{catchAll}",
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9010
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": [
+          "cadastro-ativos:categorias"
+        ]
+      }
+    }
   ],
-  "GlobalConfiguration": {
-    "RequestIdKey": "GwRequestId",
-    "AdministrationPath": "/admin",
-    "ServiceDiscoveryProvider": { "Type": "Eureka" }
-  }
+  "GlobalConfiguration": {}
 }
