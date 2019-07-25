@@ -73,8 +73,10 @@ local.properties
 *.class
 
 # Log file
-# !Afp.Log/*
+#!Afp.Log/*
+#!Afp.Log/src/main/java/br/com/andersondepaiva/log/LogApplication.java
 # *.log
+api-log.log
 
 # BlueJ files
 *.ctxt
@@ -131,7 +133,7 @@ x86/
 bld/
 [Bb]in/
 [Oo]bj/
-[Ll]og/
+#[Ll]og/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -173,7 +175,7 @@ artifacts/
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
+# *.log
 *.vspscc
 *.vssscc
 .builds
