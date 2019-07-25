@@ -74,6 +74,7 @@ local.properties
 
 # Log file
 *.log
+!Afp.Log/
 
 # BlueJ files
 *.ctxt
