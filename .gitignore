@@ -73,8 +73,8 @@ local.properties
 *.class
 
 # Log file
+!Afp.Log/*
 *.log
-!Afp.Log/
 
 # BlueJ files
 *.ctxt
