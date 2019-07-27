@@ -22,8 +22,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.google.common.base.Strings;
-
 import br.com.andersondepaiva.core.client.IUsuarioClient;
 import br.com.andersondepaiva.core.dto.BaseDto;
 import br.com.andersondepaiva.core.dto.Comparasion;
@@ -34,6 +32,8 @@ import br.com.andersondepaiva.core.infra.security.JwtConfig;
 import br.com.andersondepaiva.core.model.BaseModel;
 import br.com.andersondepaiva.core.model.UserChange;
 import br.com.andersondepaiva.core.repository.IRepositoryMongoDb;
+
+import com.google.common.base.Strings;
 
 public abstract class Business<TModel extends BaseModel, PK extends Serializable, TDto extends BaseDto>
 		implements IBusiness<TModel, PK, TDto> {
@@ -120,9 +120,10 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 
 	protected String getUserIdRequest() {
 		if (RequestContextHolder.getRequestAttributes() != null) {
-			HttpServletRequest requestContext = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
-					.getRequest();
-			String headerAuthorization = requestContext.getHeader(jwtConfig.getHeader());
+			HttpServletRequest requestContext = ((ServletRequestAttributes) RequestContextHolder
+					.getRequestAttributes()).getRequest();
+			String headerAuthorization = requestContext.getHeader(jwtConfig
+					.getHeader());
 			return authService.getUserIdByToken(headerAuthorization);
 		}
 
@@ -148,7 +149,8 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 				dtos.add((TDto) modelMapper.map(model, tipoDto));
 			});
 
-			return new PageImpl<TDto>(dtos, pageable, dataSet.getTotalElements());
+			return new PageImpl<TDto>(dtos, pageable,
+					dataSet.getTotalElements());
 		}
 
 		return new PageImpl<TDto>(new ArrayList<TDto>());
@@ -173,12 +175,16 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 	}
 
 	protected TModel fillIncluidoPor(TModel entity) {
-		if (entity.getIncluidoPor() != null && Strings.isNullOrEmpty(entity.getIncluidoPor().getNome())) {
-			UsuarioDto usuarioDto = findUserChange(entity.getIncluidoPor().getId());
+		if (entity.getIncluidoPor() != null
+				&& Strings.isNullOrEmpty(entity.getIncluidoPor().getNome())) {
+			UsuarioDto usuarioDto = findUserChange(entity.getIncluidoPor()
+					.getId());
 
 			if (usuarioDto != null) {
-				updateUserChange("incluidoPor",
-						UserChange.builder().id(usuarioDto.getId()).nome(usuarioDto.getPessoa().getNome()).build(),
+				updateUserChange(
+						"incluidoPor",
+						UserChange.builder().id(usuarioDto.getId())
+								.nome(usuarioDto.getPessoa().getNome()).build(),
 						entity.getId());
 			}
 		}
@@ -187,12 +193,16 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 	}
 
 	protected TModel fillAlteradoPor(TModel entity) {
-		if (entity.getAlteradoPor() != null && Strings.isNullOrEmpty(entity.getAlteradoPor().getNome())) {
-			UsuarioDto usuarioDto = findUserChange(entity.getAlteradoPor().getId());
+		if (entity.getAlteradoPor() != null
+				&& Strings.isNullOrEmpty(entity.getAlteradoPor().getNome())) {
+			UsuarioDto usuarioDto = findUserChange(entity.getAlteradoPor()
+					.getId());
 
 			if (usuarioDto != null) {
-				updateUserChange("alteradoPor",
-						UserChange.builder().id(usuarioDto.getId()).nome(usuarioDto.getPessoa().getNome()).build(),
+				updateUserChange(
+						"alteradoPor",
+						UserChange.builder().id(usuarioDto.getId())
+								.nome(usuarioDto.getPessoa().getNome()).build(),
 						entity.getId());
 			}
 		}
@@ -200,7 +210,8 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 		return entity;
 	}
 
-	protected void updateUserChange(String userChangeType, UserChange userChange, String idEntity) {
+	protected void updateUserChange(String userChangeType,
+			UserChange userChange, String idEntity) {
 		Update update = new Update();
 		update.set(userChangeType, userChange);
 		executeAtomicUpdate(update, idEntity);
@@ -215,8 +226,10 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 		return new Query(Criteria.where("id").is(id));
 	}
 
-	protected Page<TDto> filterAndPaginate(List<ParamDto> params, Pageable pageable, Sort sortable) {
-		Page<TModel> resultPage = filterAndPaginateModel(params, pageable, sortable);
+	protected Page<TDto> filterAndPaginate(List<ParamDto> params,
+			Pageable pageable, Sort sortable) {
+		Page<TModel> resultPage = filterAndPaginateModel(params, pageable,
+				sortable);
 
 		if (resultPage.hasContent()) {
 			List<TDto> dtos = new ArrayList<TDto>();
@@ -224,15 +237,17 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 				dtos.add(modelMapper.map(model, tipoDto));
 			});
 
-			return new PageImpl<TDto>(dtos, pageable, resultPage.getTotalElements());
+			return new PageImpl<TDto>(dtos, pageable,
+					resultPage.getTotalElements());
 		}
 
 		return new PageImpl<TDto>(new ArrayList<TDto>());
 	}
 
-	protected Page<TModel> filterAndPaginateModel(List<ParamDto> params, Pageable pageable, Sort sortable) {
+	protected Page<TModel> filterAndPaginateModel(List<ParamDto> params,
+			Pageable pageable, Sort sortable) {
 		Query query = new Query().with(pageable);
-		
+
 		if (sortable != null) {
 			query.with(sortable);
 		}
@@ -245,6 +260,16 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 		long count = mongoTemplate.count(query, tipoModel);
 
 		return new PageImpl<TModel>(dataSet, pageable, count);
+	}
+
+	protected Query buildQuery(List<ParamDto> params) {
+		Query query = new Query();
+
+		params.forEach(param -> {
+			query.addCriteria(buildCriteria(param));
+		});
+
+		return query;
 	}
 
 	private Criteria buildCriteria(ParamDto param) {
@@ -278,8 +303,9 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 	}
 
 	private Class<?> getTypeClass(Integer indexClass) {
-		Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-				.getActualTypeArguments()[indexClass == null ? 0 : indexClass];
+		Class<?> clazz = (Class<?>) ((ParameterizedType) this.getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[indexClass == null ? 0
+				: indexClass];
 		return clazz;
 	}
 

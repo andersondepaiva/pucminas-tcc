@@ -21,7 +21,7 @@ public class SolicitacaoMensagem extends BaseModel {
 	
 	private String motivo;
 	
-	private List<Escopo> escopos;
+	private String mensagem;
 	
-	private Status status;
+	private List<String> escoposId;
 }

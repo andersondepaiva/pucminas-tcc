@@ -19,5 +19,7 @@ public class Mensagem extends BaseModel {
 	
 	private SolicitacaoMensagem solicitacaoMensagem;
 	
-	private Escopo escopo;
+	private Contato contato;
+	
+	private Status status;
 }

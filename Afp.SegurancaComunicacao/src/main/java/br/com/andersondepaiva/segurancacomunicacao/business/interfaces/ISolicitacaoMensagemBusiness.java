@@ -4,6 +4,7 @@ import br.com.andersondepaiva.core.business.IBusiness;
 import br.com.andersondepaiva.segurancacomunicacao.dto.SolicitacaoMensagemDto;
 import br.com.andersondepaiva.segurancacomunicacao.model.SolicitacaoMensagem;
 
-public interface ISolicitacaoMensagemBusiness extends IBusiness<SolicitacaoMensagem, String, SolicitacaoMensagemDto> {
-
+public interface ISolicitacaoMensagemBusiness extends
+		IBusiness<SolicitacaoMensagem, String, SolicitacaoMensagemDto> {
+	void sendMessages(SolicitacaoMensagemDto dto);
 }
