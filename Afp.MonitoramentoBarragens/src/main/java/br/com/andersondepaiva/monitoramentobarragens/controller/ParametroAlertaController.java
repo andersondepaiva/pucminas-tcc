@@ -1,14 +1,15 @@
-package br.com.andersondepaiva.segurancacomunicacao.controller;
+package br.com.andersondepaiva.monitoramentobarragens.controller;
 
 import io.swagger.annotations.Api;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,35 +18,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.andersondepaiva.segurancacomunicacao.business.interfaces.IEscopoBusiness;
-import br.com.andersondepaiva.segurancacomunicacao.dto.EscopoDto;
-import br.com.andersondepaiva.segurancacomunicacao.dto.EscopoFilter;
+import br.com.andersondepaiva.monitoramentobarragens.business.interfaces.IParametroAlertaBusiness;
+import br.com.andersondepaiva.monitoramentobarragens.dto.ParametroAlertaDto;
 
 @RestController
-@RequestMapping("/escopos")
+@RequestMapping("/parametros-alerta")
 @Api
-public class EscopoController {
+public class ParametroAlertaController {
 
 	@Autowired
-	private IEscopoBusiness escopoBusiness;
+	private IParametroAlertaBusiness parametroAlertaBusiness;
 
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/json" })
-	public ResponseEntity<EscopoDto> Post(@Valid @RequestBody EscopoDto dto)
+	public ResponseEntity<ParametroAlertaDto> Post(
+			@Valid @RequestBody ParametroAlertaDto dto)
 			throws ReflectiveOperationException, NoSuchAlgorithmException {
-		EscopoDto retorno = escopoBusiness.save(dto);
-		return new ResponseEntity<EscopoDto>(retorno, HttpStatus.CREATED);
+		ParametroAlertaDto retorno = parametroAlertaBusiness.save(dto);
+		return new ResponseEntity<ParametroAlertaDto>(retorno,
+				HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { "application/json" })
-	public ResponseEntity<EscopoDto> GetById(@PathVariable("id") String id) {
-		Optional<EscopoDto> retorno = escopoBusiness.findById(id);
-		return retorno.isPresent() ? new ResponseEntity<EscopoDto>(
+	public ResponseEntity<ParametroAlertaDto> GetById(
+			@PathVariable("id") String id) {
+		Optional<ParametroAlertaDto> retorno = parametroAlertaBusiness
+				.findById(id);
+		return retorno.isPresent() ? new ResponseEntity<ParametroAlertaDto>(
 				retorno.get(), HttpStatus.OK) : new ResponseEntity<>(
 				HttpStatus.NO_CONTENT);
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
-	public List<EscopoDto> GetAll(EscopoFilter escopoFilter) {
-		return escopoBusiness.getAll(escopoFilter);
+	public Page<ParametroAlertaDto> GetAll(Pageable filtro) {
+		return parametroAlertaBusiness.getAll(filtro);
 	}
 }

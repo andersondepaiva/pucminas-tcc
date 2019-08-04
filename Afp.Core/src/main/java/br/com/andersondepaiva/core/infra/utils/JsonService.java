@@ -14,5 +14,4 @@ public class JsonService {
 	public ObjectMapper getObjectMapper() {
 		return objectMapper;
 	}
-
 }

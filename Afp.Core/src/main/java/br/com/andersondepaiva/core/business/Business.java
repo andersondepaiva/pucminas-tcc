@@ -231,6 +231,11 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 		Page<TModel> resultPage = filterAndPaginateModel(params, pageable,
 				sortable);
 
+		return convertPageModelResultToPageDto(resultPage, pageable);
+	}
+
+	protected PageImpl<TDto> convertPageModelResultToPageDto(
+			Page<TModel> resultPage, Pageable pageable) {
 		if (resultPage.hasContent()) {
 			List<TDto> dtos = new ArrayList<TDto>();
 			resultPage.getContent().stream().forEach(model -> {
@@ -256,6 +261,11 @@ public abstract class Business<TModel extends BaseModel, PK extends Serializable
 			query.addCriteria(buildCriteria(param));
 		});
 
+		return executeQueryAndPaginate(query, pageable);
+	}
+
+	protected Page<TModel> executeQueryAndPaginate(Query query,
+			Pageable pageable) {
 		List<TModel> dataSet = mongoTemplate.find(query, tipoModel);
 		long count = mongoTemplate.count(query, tipoModel);
 
