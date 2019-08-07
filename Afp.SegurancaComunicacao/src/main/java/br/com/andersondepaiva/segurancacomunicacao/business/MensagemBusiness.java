@@ -68,8 +68,8 @@ public class MensagemBusiness extends Business<Mensagem, String, MensagemDto>
 			NexmoClientException {
 		try {
 
-			NexmoClient client = new NexmoClient.Builder().apiKey("5831ea79")
-					.apiSecret("REOduqS9o658iixe").build();
+			NexmoClient client = new NexmoClient.Builder().apiKey(apiKeySMS)
+					.apiSecret(apiSecret).build();
 
 			String messageText = mensagem.getSolicitacaoMensagem()
 					.getMensagem();
