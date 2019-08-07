@@ -99,6 +99,16 @@ export default {
   created () {
     this.service = new LoginService(Vue.http)
     this.authService = new AuthService()
+  },
+  mounted () {
+    this.authService.getSignedIn().then(
+      signIn => {
+        this.signedIn = signIn
+      },
+      err => {
+        console.log(err)
+      }
+    )    
   }
 }
 </script>

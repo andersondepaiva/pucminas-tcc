@@ -1,26 +1,24 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
+using IdentityServer.Application.Mapping;
+using IdentityServer.Application.Service.Interface;
+using IdentityServer.Infra.IoC;
+using IdentityServer.Infra.IoC.Extensions;
+using IdentityServer.Service.Configuration;
+using IdentityServer.Swagger;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using IdentityServer.Infra.IoC;
-using IdentityServer.Swagger;
-using IdentityServer.Application.Mapping;
-using IdentityServer.Infra.IoC.Extensions;
-using IdentityServer4;
-using Microsoft.IdentityModel.Tokens;
-using IdentityServer.Application.Service.Interface;
-using IdentityServer.Service.Configuration;
+using System.Reflection;
 
 namespace IdentityServer.Service
 {
@@ -59,7 +57,7 @@ namespace IdentityServer.Service
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMediatR();
-
+            services.AddCors();
             services.AddIdentityServer()
                 // Only Environments without certificate
                 .AddDeveloperSigningCredential()
@@ -70,6 +68,7 @@ namespace IdentityServer.Service
                 .AddPersistedGrants();
 
             var providersConfig = new ProvidersConfig();
+
             Configuration.Bind("Providers", providersConfig);
 
             services.AddAuthentication()
@@ -122,6 +121,12 @@ namespace IdentityServer.Service
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors(opt =>
+            {
+                opt.AllowAnyOrigin();
+                opt.AllowAnyMethod();
+                opt.AllowAnyHeader();
+            });
             app.UseIdentityServer();
             app.UseAuthentication();
 

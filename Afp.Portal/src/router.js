@@ -5,6 +5,8 @@ const KiConfiguration = () => import('./components/configuration/KiConfiguration
 const KiUserProfileEdit = () => import('./components/configuration/user/KiUserProfileEdit.vue')
 const KiLogin = () => import('./components/login/KiLogin.vue')
 const KiBaseView = () => import('./components/KiBaseView.vue')
+const UnauthorizedView = () => import('./components/login/Unauthorized.vue')
+const CallbackView = () => import('./components/login/Callback.vue')
 
 Vue.use(Router)
 
@@ -44,6 +46,20 @@ export default new Router({
           icon: 'person',
           menu: true,
           meta: { auth: true }
+        },
+        {
+          path: '/unauthorized',
+          name: 'Unauthorized',
+          component: UnauthorizedView,
+          menu: false,
+          meta: { auth: false }
+        },
+        {
+          path: '/callback',
+          name: 'Callback',
+          component: CallbackView,
+          menu: false,
+          meta: { auth: false }
         }
       ]
     }
