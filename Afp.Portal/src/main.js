@@ -30,34 +30,19 @@ Vue.http.options.root = process.env.VUE_APP_ROOT_API
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {
-    if (!Vue.ls.get('authorizationData')) {
-      authService.getRole().then(
-        sucess => {
-          /* if (to.meta.role == sucess){
-            next();
-          }else {
-            next('/accessdenied');
-          } */
-        },
-        err => {
-          console.log(err)
-        }
-      )
-      return
-    }
-
-    if (to.matched.some(record => record.meta.roles)) {
-      let userLogged = new AuthService().getUserLogged()
-      if (!userLogged || to.meta.roles.indexOf(userLogged.tipoUsuario) < 0) {
-        next({
-          path: '/'
-        })
-        return
+  let result = to.matched.some(record => record.meta.auth)
+  console.log('result some record', result)
+  if (result) {
+    authService.getRole().then(
+      success => {
+        next()
+      },
+      err => {
+        console.log('error success', err)
       }
-    }
-    next()
+    )
   } else {
+    console.log('else if some record')
     next()
   }
 })

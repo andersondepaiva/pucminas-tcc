@@ -54,7 +54,7 @@ export default {
     this.authService = new AuthService()
     Vue.http.interceptors.push((req, next) => {
       req.headers.set('x-api-key', 'cd5eecc64a0a79b2ca5be934fce41fcf')
-      req.headers.set('Authorization', this.authService.getToken())
+     // req.headers.set('Authorization', this.authService.getToken())
       next(res => {
         if (res.status !== 200) {
           if (res.status === 401 || res.status === 403) {

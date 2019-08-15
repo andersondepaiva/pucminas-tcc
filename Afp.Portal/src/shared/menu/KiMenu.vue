@@ -115,16 +115,6 @@ export default {
       userLogged: null
     }
   },
-  computed: {
-    userLoggedValue: function () {
-      return this.$store.getters['authModule/userLogged']
-    }
-  },
-  watch: {
-    userLoggedValue (newValue, oldValue) {
-      this.userLogged = newValue ? newValue.pessoa.nome : 'Katalon Integration'
-    }
-  },
   mounted () {
     if (router.options.routes != null) {
       this.buildItemsMenu(router.options.routes)
@@ -132,11 +122,17 @@ export default {
     router.options.routes.filter(r => r.menu)
   },
   created () {
-    this.authService = new AuthService(this.$http)
-    let usrLogged = this.authService.getUserLogged()
-    if (usrLogged) {
-      this.userLogged = usrLogged.pessoa.nome
-    }
+    this.authService = new AuthService()
+
+    this.authService.getProfile().then(profile => {
+          if (profile) {
+            this.userLogged = profile.user_name
+          }
+        },
+        err => {
+          console.log(err)
+    })
+    
   },
   methods: {
     redirect (path) {
@@ -145,8 +141,7 @@ export default {
     },
 
     logout () {
-      this.authService.logout()
-      this.$router.push({ name: 'Login' })
+      this.authService.signOut()
     },
 
     buildItemsMenu (routes) {
@@ -169,13 +164,13 @@ export default {
         return true
       }
 
-      let typeUser = this.authService.getTypeUserLogged()
+      /*let typeUser = this.authService.getTypeUserLogged()
 
       if (!typeUser) {
         return false
       }
 
-      return typeUser.some(r => menu.meta.roles.includes(r))
+      return typeUser.some(r => menu.meta.roles.includes(r))*/
     }
   }
 }

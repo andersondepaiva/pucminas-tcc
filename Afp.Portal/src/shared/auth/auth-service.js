@@ -6,12 +6,11 @@ import Oidc from 'oidc-client'
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
   authority: 'http://localhost:5000',
-  client_id: 'vuejsclient',
-  redirect_uri: window.location.origin + '/static/callback.html',
+  client_id: 'sca-portal',
+  redirect_uri: window.location.origin + '/callback',
   response_type: 'id_token token',
-  scope: 'openid profile address roles identityserver4api country subscriptionlevel offline_access',
-  post_logout_redirect_uri: window.location.origin + '/index.html',
-  silent_redirect_uri: window.location.origin + '/static/silent-renew.html',
+  scope: 'openid cadastro-ativos:categorias:read',
+  post_logout_redirect_uri: window.location.origin + '/',
   accessTokenExpiringNotificationTime: 10,
   automaticSilentRenew: true,
   filterProtocolClaims: true,
@@ -54,7 +53,7 @@ mgr.events.addUserSignedOut(function () {
   })
 })
 
-export default class SecurityService {
+export default class AuthService {
   // Renew the token manually
   renewToken () {
     let self = this
@@ -78,7 +77,7 @@ export default class SecurityService {
     return new Promise((resolve, reject) => {
       mgr.getUser().then(function (user) {
         if (user == null) {
-          self.signIn()
+          self.signInRedirectCallback()
           return resolve(null)
         } else {
           return resolve(user)
@@ -115,6 +114,17 @@ export default class SecurityService {
     })
   }
 
+  signInRedirectCallback () {
+    return new Promise((resolve, reject) => {
+      mgr.signinRedirectCallback().then(function (user) {
+        return resolve(user)
+      }).catch(function (err) {
+        console.log('signRedirectCallBack catch', err)
+        return reject(err)
+      })
+    })
+  }
+
   // Redirect of the current window to the end session endpoint
   signOut () {
     mgr.signoutRedirect().then(function (resp) {
@@ -129,8 +139,8 @@ export default class SecurityService {
     let self = this
     return new Promise((resolve, reject) => {
       mgr.getUser().then(function (user) {
-        if (user == null) {
-          self.signIn()
+        if (user === null || user === undefined) {
+          self.signInRedirectCallback()
           return resolve(null)
         } else {
           return resolve(user.profile)

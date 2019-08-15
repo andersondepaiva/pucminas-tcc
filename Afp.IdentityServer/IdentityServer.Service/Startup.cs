@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using IdentityServer.Application.Mapping;
+using IdentityServer.Application.Service;
 using IdentityServer.Application.Service.Interface;
 using IdentityServer.Infra.IoC;
 using IdentityServer.Infra.IoC.Extensions;
@@ -65,7 +66,9 @@ namespace IdentityServer.Service
                 .AddMongoRepository()
                 .AddClients()
                 .AddIdentityApiResources()
-                .AddPersistedGrants();
+                .AddPersistedGrants()
+                .AddProfileService<CustomProfileService>();
+            //.AddCustomTokenRequestValidator<CustomTokenValidator>();
 
             var providersConfig = new ProvidersConfig();
 

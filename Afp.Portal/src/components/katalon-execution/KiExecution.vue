@@ -97,9 +97,9 @@ export default {
     this.projectService = new ConfigurationService(this.$http)
   },
   mounted () {
-    this.projectService.getProjects().then((dados) => {
+   /* this.projectService.getProjects().then((dados) => {
       this.projects = dados.content
-    })
+    })*/
   },
   methods: {
     loadResourcesFromProject () {

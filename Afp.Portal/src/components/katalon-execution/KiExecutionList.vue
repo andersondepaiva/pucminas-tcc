@@ -339,7 +339,7 @@ export default {
         this.timeToRefresh = refreshTime
       }
 
-      this.service
+      /*this.service
         .get(
           this.buildParameters()
         )
@@ -347,7 +347,7 @@ export default {
           this.content = dados.content
           this.totalElements = dados.totalElements
           this.loading = false
-        })
+        })*/
     },
     calculateColor (item) {
       switch (item.statusExecution) {
