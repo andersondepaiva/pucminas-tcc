@@ -5,6 +5,6 @@ export default class MonitoramentoBarragensService {
     this._http = http
   }
   getMonitoramentos () {
-    return this._http.get(_url + '/monitoramento-barragens').then(res => res.json())
+    return this._http.get(_url + '/monitoramento-barragens/barragem/5d45f1e737eae52f043b44a7').then(res => res.json())
   }
 }

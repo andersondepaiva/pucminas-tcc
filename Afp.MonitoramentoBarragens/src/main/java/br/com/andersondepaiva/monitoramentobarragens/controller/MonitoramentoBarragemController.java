@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.andersondepaiva.monitoramentobarragens.business.interfaces.IMonitoramentoBarragemBusiness;
 import br.com.andersondepaiva.monitoramentobarragens.dto.MonitoramentoBarragemDto;
+import br.com.andersondepaiva.monitoramentobarragens.dto.RelatorioMonitoramentoBarragemDto;
 
 @RestController
 @RequestMapping("/monitoramento-barragens")
@@ -52,5 +53,11 @@ public class MonitoramentoBarragemController {
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
 	public Page<MonitoramentoBarragemDto> GetAll(Pageable filtro) {
 		return monitoramentoBarragemBusiness.getAll(filtro);
+	}
+
+	@RequestMapping(value = "/barragem/{id}", method = RequestMethod.GET, produces = { "application/json" })
+	public RelatorioMonitoramentoBarragemDto GetAllByBarragem(
+			@PathVariable("id") String id) {
+		return monitoramentoBarragemBusiness.getAllByBarragem(id);
 	}
 }

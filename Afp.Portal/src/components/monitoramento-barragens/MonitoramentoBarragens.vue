@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1 class="ki-title">Monitoramento de Barragens</h1>
+    <h2>{{title}}</h2>
+    <h3>{{subtitle}}</h3>
     <v-speed-dial
       open-on-hover
       direction="left"
@@ -78,23 +80,46 @@ export default {
     return {
       content: [],
       loading: true,
+      title: '',
+      subtitle: '',
       timeToRefresh: 0,
       chartOptions: {
-          chart: {
-            id: 'vuechart-example'
+        annotations: {
+            yaxis: []
+        },
+        chart: {
+          type: 'line',
+          shadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 1
           },
-          xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          id: 'monitoramento-barragens',
+          toolbar: {
+            show: false
           }
         },
-      series: [{
-            name: 'deslocamentoSolo',
-            data: [30, 40, 35, 50, 49, 60, 70, 91]
+        stroke: {
+            curve: 'straight'
+          },
+        dataLabels: {
+          enabled: false,
+        },
+        xaxis: {
+          categories: []
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5
+          }
       },
-      {
-        name:'volumeAtual',
-        data:[0.001, 1.0E+8, 8900, 5000, 4100, 7400, 7000, 9001]
-      }]
+      series: []
     }
   },
   computed: {
@@ -112,6 +137,7 @@ export default {
   },
   created () {
     this.monitoramentoBarragensService = new MonitoramentoBarragensService(this.$http)
+    this.get(null);
   },
   methods: {
     get (refreshTime) {
@@ -122,9 +148,36 @@ export default {
       this.monitoramentoBarragensService
         .getMonitoramentos()
         .then(dados => {
-          this.content = dados.content
+          this.content = dados
+          this.series = []
+          this.title = `Monitoramento ${this.content.barragem.descricao}`
+          this.subtitle = `Minério Principal ${this.content.barragem.minerioPrincipal.descricao}`
+          this.chartOptions.annotations.yaxis = []
+          this.chartOptions.xaxis.categories = this.content.monitoramentos.map(a => new Date(a.dataInclusao).getTime())
+
+          this.chartOptions.annotations.yaxis.push({
+              y: this.content.barragem.volume,
+              borderColor: '#00E396',
+              label: {
+                borderColor: '#00E396',
+                style: {
+                  color: '#fff',
+                  background: '#00E396',
+                },
+                text: 'Volume',
+              }
+          })
+
+          this.series.push(
+          {
+            name: 'Deslocamento Solo',
+            data: this.content.monitoramentos.map(a => a.deslocamentoSolo)
+          })
+          this.series.push({
+            name: 'Volume Atual',
+            data: this.content.monitoramentos.map(a => a.volumeAtual)
+          })
           this.loading = false
-          this.renderChart(this.content, this.options)
         })
     },
     calculateColor (item) {

@@ -61,12 +61,10 @@ export default {
         next(res => {
           if (res.status !== 200) {
             if (res.status === 401 || res.status === 403) {
-              router.push({
-                name: 'Login'
-              })
               this.$store.dispatch('snackBarModule/showMessageError', {
                 text: 'Invalid Authentication'
               })
+              this.authService.signIn()
             } else if (res.status === 400) {
               let textMessage = ''
               res.body.errors.forEach(e => {
