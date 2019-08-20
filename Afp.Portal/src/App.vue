@@ -50,34 +50,37 @@ export default {
       }
     }
   },
-  created () {
+  async created () {
     this.authService = new AuthService()
-    Vue.http.interceptors.push((req, next) => {
-      req.headers.set('x-api-key', 'cd5eecc64a0a79b2ca5be934fce41fcf')
-     // req.headers.set('Authorization', this.authService.getToken())
-      next(res => {
-        if (res.status !== 200) {
-          if (res.status === 401 || res.status === 403) {
-            router.push({
-              name: 'Login'
-            })
-            this.$store.dispatch('snackBarModule/showMessageError', {
-              text: 'Invalid Authentication'
-            })
-          } else if (res.status === 400) {
-            let textMessage = ''
-            res.body.errors.forEach(e => {
-              textMessage = textMessage + ' ' + e.defaultMessage
-            })
-            this.$store.dispatch('snackBarModule/showMessageError', {
-              text: textMessage
-            })
-          } else if (res.status === 500) {
-            this.$store.dispatch('snackBarModule/showMessageFatal', {
-              text: 'Sorry, unexpected error occurred on our servers :('
-            })
-          }
+      Vue.http.interceptors.push((req, next) => {
+        let tokenData = Vue.ls.get('authorizationData')
+        if (tokenData){
+          req.headers.set('Authorization', 'Bearer ' + tokenData.token)
         }
+
+        next(res => {
+          if (res.status !== 200) {
+            if (res.status === 401 || res.status === 403) {
+              router.push({
+                name: 'Login'
+              })
+              this.$store.dispatch('snackBarModule/showMessageError', {
+                text: 'Invalid Authentication'
+              })
+            } else if (res.status === 400) {
+              let textMessage = ''
+              res.body.errors.forEach(e => {
+                textMessage = textMessage + ' ' + e.defaultMessage
+              })
+              this.$store.dispatch('snackBarModule/showMessageError', {
+                text: textMessage
+              })
+            } else if (res.status === 500) {
+              this.$store.dispatch('snackBarModule/showMessageFatal', {
+                text: 'Sorry, unexpected error occurred on our servers :('
+              })
+            }
+          }
       })
     })
   }

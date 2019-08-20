@@ -129,6 +129,7 @@ namespace IdentityServer.Service
                 opt.AllowAnyOrigin();
                 opt.AllowAnyMethod();
                 opt.AllowAnyHeader();
+                opt.AllowCredentials();
             });
             app.UseIdentityServer();
             app.UseAuthentication();

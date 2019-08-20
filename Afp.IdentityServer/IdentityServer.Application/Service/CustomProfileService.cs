@@ -16,12 +16,14 @@ namespace IdentityServer.Application.Service
             _customClientRepository = customClientRepository;
         }
 
-        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             var claimIdentity = GetClaimsFromUser(context.Subject);
 
             if (claimIdentity?.Name != null)
                 context.IssuedClaims.Add(new Claim("user_name", claimIdentity.Name));
+
+            return Task.CompletedTask;
         }
 
         public async Task IsActiveAsync(IsActiveContext context)

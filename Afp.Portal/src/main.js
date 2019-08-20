@@ -11,6 +11,10 @@ import VueLocalStorage from 'vue-ls'
 import VueJwtDecode from 'vue-jwt-decode'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import AuthService from './shared/auth/auth-service'
+import VueApexCharts from 'vue-apexcharts'
+
+Vue.use(VueApexCharts)
+Vue.component('apexchart', VueApexCharts)
 
 Vue.config.productionTip = false
 let options = {

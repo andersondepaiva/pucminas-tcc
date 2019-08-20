@@ -40,7 +40,7 @@ public class MonitoramentoBarragemBusiness extends
 				MonitoramentoBarragem.class);
 
 		MonitoramentoBarragemDto monitoramentoBarragemDto = modelMapper.map(
-				baseRepository.save(entity), MonitoramentoBarragemDto.class);
+				super.save(entity), MonitoramentoBarragemDto.class);
 
 		monitoramentoBarragemProducer.sendMessage(monitoramentoBarragemProducer
 				.monitoramentoBarragemExchange().getName(),

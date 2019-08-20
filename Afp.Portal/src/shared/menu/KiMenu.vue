@@ -101,6 +101,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import router from '../../router'
 import AuthService from '../auth/auth-service'
 
@@ -115,6 +116,16 @@ export default {
       userLogged: null
     }
   },
+  computed: {
+    userLoggedValue: function () {
+      return this.$store.getters['authModule/userLogged']
+    }
+  },
+  watch: {
+    userLoggedValue (newValue, oldValue) {
+      this.userLogged = newValue ? newValue : 'Katalon Integration'
+    }
+  },
   mounted () {
     if (router.options.routes != null) {
       this.buildItemsMenu(router.options.routes)
@@ -123,16 +134,10 @@ export default {
   },
   created () {
     this.authService = new AuthService()
-
-    this.authService.getProfile().then(profile => {
-          if (profile) {
-            this.userLogged = profile.user_name
-          }
-        },
-        err => {
-          console.log(err)
-    })
-    
+    let userLocalStorage = Vue.ls.get('userLogged')
+    if (userLocalStorage) {
+      this.userLogged = userLocalStorage.user
+    }  
   },
   methods: {
     redirect (path) {
@@ -163,14 +168,6 @@ export default {
       !menu.meta.roles.length) {
         return true
       }
-
-      /*let typeUser = this.authService.getTypeUserLogged()
-
-      if (!typeUser) {
-        return false
-      }
-
-      return typeUser.some(r => menu.meta.roles.includes(r))*/
     }
   }
 }

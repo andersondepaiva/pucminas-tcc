@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const KiExecutionList = () => import('./components/katalon-execution/KiExecutionList.vue')
-const KiConfiguration = () => import('./components/configuration/KiConfiguration.vue')
-const KiUserProfileEdit = () => import('./components/configuration/user/KiUserProfileEdit.vue')
+const MonitoramentoBarragens = () => import('./components/monitoramento-barragens/MonitoramentoBarragens.vue')
 const KiLogin = () => import('./components/login/KiLogin.vue')
 const KiBaseView = () => import('./components/KiBaseView.vue')
 const UnauthorizedView = () => import('./components/login/Unauthorized.vue')
@@ -25,25 +23,9 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: 'Execution',
-          component: KiExecutionList,
-          icon: 'play_arrow',
-          menu: true,
-          meta: { auth: true }
-        },
-        {
-          path: '/configuration',
-          name: 'Configuration',
-          component: KiConfiguration,
-          icon: 'build',
-          menu: true,
-          meta: { auth: true, roles: ['ADMIN'] }
-        },
-        {
-          path: '/profile',
-          name: 'My Profile',
-          component: KiUserProfileEdit,
-          icon: 'person',
+          name: 'Monitoramento Barragens',
+          component: MonitoramentoBarragens,
+          icon: 'bar_chart',
           menu: true,
           meta: { auth: true }
         },

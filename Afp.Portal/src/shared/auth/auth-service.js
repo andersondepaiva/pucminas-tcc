@@ -2,6 +2,8 @@
 import ConfigurationService from '../../components/configuration/services/configuration-service'
 import store from '../../store/index' */
 import Oidc from 'oidc-client'
+import Vue from 'vue'
+import store from '../../store/index'
 
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
@@ -9,7 +11,7 @@ var mgr = new Oidc.UserManager({
   client_id: 'sca-portal',
   redirect_uri: window.location.origin + '/callback',
   response_type: 'id_token token',
-  scope: 'openid cadastro-ativos:categorias:read',
+  scope: 'openid cadastro-ativos-portal monitoramento-barragens-portal',
   post_logout_redirect_uri: window.location.origin + '/',
   accessTokenExpiringNotificationTime: 10,
   automaticSilentRenew: true,
@@ -23,6 +25,16 @@ Oidc.Log.level = Oidc.Log.INFO
 mgr.events.addUserLoaded(function (user) {
   console.log('New User Loaded：', arguments)
   console.log('Acess_token: ', user.access_token)
+  Vue.ls.set('authorizationData', {
+    token: user.access_token
+  })
+  console.log('userLocalStorage', user)
+  Vue.ls.set('userLogged', {
+    user: user.profile.user_name
+  })
+  store.dispatch('authModule/updateUser', {
+    user: user.profile.user_name
+  })
 })
 
 mgr.events.addAccessTokenExpiring(function () {
@@ -89,6 +101,15 @@ export default class AuthService {
     })
   }
 
+  getUserLogged () {
+    if (Vue.ls.get('userLogged')) {
+      let user = Vue.ls.get('userLogged')
+      return user.user
+    }
+
+    return null
+  }
+
   // Check if there is any user logged in
   getSignedIn () {
     let self = this
@@ -128,6 +149,7 @@ export default class AuthService {
   // Redirect of the current window to the end session endpoint
   signOut () {
     mgr.signoutRedirect().then(function (resp) {
+      Vue.ls.remove('authorizationData')
       console.log('signed out', resp)
     }).catch(function (err) {
       console.log(err)

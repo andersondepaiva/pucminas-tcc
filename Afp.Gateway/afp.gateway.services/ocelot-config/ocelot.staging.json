@@ -1,18 +1,39 @@
 {
   "ReRoutes": [
-  ],
-  "GlobalConfiguration": {
-    "RequestIdKey": "GwRequestId",
-    "AdministrationPath": "/admin",
-    "ServiceDiscoveryProvider": {
-      "Host": "localhost",
-      "Port": 8761,
-      "Type": "Eureka"
+    {
+      "UpstreamPathTemplate": "/api/cadastro-ativos/{catchAll}",
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9010
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": [
+          "cadastro-ativos-portal"
+        ]
+      }
     },
-    "DownstreamScheme": "http",
-    "AuthenticationOptions": {
-      "AuthenticationProviderKey": "IdentityApiKey",
-      "AllowedScopes": []
+    {
+      "UpstreamPathTemplate": "/api/monitoramento-barragens/{catchAll}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete", "Options" ],
+      "DownstreamPathTemplate": "/{catchAll}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9012
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": [
+          "monitoramento-barragens-portal"
+        ]
+      }
     }
-  }
+  ]
 }

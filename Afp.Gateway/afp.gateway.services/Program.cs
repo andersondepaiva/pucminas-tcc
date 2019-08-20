@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Provider.Eureka;
 using System.IO;
 
 namespace afp.gateway.services
@@ -38,12 +38,25 @@ namespace afp.gateway.services
             .ConfigureServices(s =>
             {
                 ConfigureAuthentication(s);
-                s.AddOcelot()
-                .AddEureka();
+                s.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials());
+                });
+                s.AddOcelot();
             })
             .UseIISIntegration()
+            .ConfigureLogging(loggerFactory =>
+            {
+                loggerFactory.AddConsole();
+            })
             .Configure(app =>
             {
+                app.UseCors("CorsPolicy");
                 app.UseOcelot().Wait();
             })
             .Build();
