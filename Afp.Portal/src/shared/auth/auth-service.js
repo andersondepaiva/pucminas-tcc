@@ -11,7 +11,7 @@ var mgr = new Oidc.UserManager({
   client_id: 'sca-portal',
   redirect_uri: window.location.origin + '/callback',
   response_type: 'id_token token',
-  scope: 'openid cadastro-ativos-portal monitoramento-barragens-portal',
+  scope: 'openid cadastro-ativos-portal monitoramento-barragens-portal seguranca-comunicacao-portal',
   post_logout_redirect_uri: window.location.origin + '/',
   accessTokenExpiringNotificationTime: 10,
   automaticSilentRenew: true,

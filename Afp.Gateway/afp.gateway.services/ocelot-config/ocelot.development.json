@@ -19,6 +19,24 @@
       }
     },
     {
+      "UpstreamPathTemplate": "/api/seguranca-comunicacao/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "Priority": 0,
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 9011
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": [
+          "seguranca-comunicacao-portal"
+        ]
+      }
+    },
+    {
       "UpstreamPathTemplate": "/api/monitoramento-barragens/{everything}",
       "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",

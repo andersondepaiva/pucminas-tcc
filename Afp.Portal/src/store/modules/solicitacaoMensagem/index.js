@@ -4,8 +4,8 @@ import getters from './getters'
 
 // initial state
 const state = {
-  project: null,
-  isChangeProject: false
+  solicitacaoMensagem: null,
+  isChangeSolicitacao: false
 }
 
 export default {

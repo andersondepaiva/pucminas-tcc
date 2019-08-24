@@ -1,11 +1,13 @@
 <template>
   <div>
     <h1 class="ki-title">Monitoramento de Barragens</h1>
-    <div class="title font-weight-medium">{{barragem}}</div>
-    <div class="subtitle-1 font-weight-medium">{{minerioPrincipal}}</div>
-    <div :class="calculateColorDanoPotecial()">{{danoPotencial}}</div>
-    <div :class="calculateColorRisco()">{{risco}}</div>
-    <div class="subtitle-2 font-weight-medium">{{metodoConstrutivo}}</div>
+    <div v-show="content && content.barragem">
+      <div class="title font-weight-medium"><v-icon>satellite</v-icon> {{barragem}}</div>
+      <div class="subtitle-1 font-weight-medium"><v-icon>layers</v-icon> {{minerioPrincipal}}</div>
+      <div :class="calculateColorDanoPotecial()"><v-icon>error</v-icon> {{danoPotencial}}</div>
+      <div :class="calculateColorRisco()"><v-icon>warning</v-icon> {{risco}}</div>
+      <div class="subtitle-2 font-weight-medium"><v-icon>category</v-icon> {{metodoConstrutivo}}</div>
+    </div>
     <v-autocomplete
         style="float: right; margin-top:-80px; margin-right:24px"
         v-model="barragemSearch"
@@ -22,6 +24,9 @@
         prepend-icon="search"
         return-object
     ></v-autocomplete>
+    <v-btn fab dark @click="openDialog()" style="float: right; margin-bottom: 16px !important; margin-top: -26px !important; margin-right: 16px !important;" color="blue" id="btn_dialog_solitacao_mensagem">
+      <v-icon dark>add_alert</v-icon>
+    </v-btn>
     <v-speed-dial
       open-on-hover
       direction="left"
@@ -99,13 +104,28 @@
           </v-flex>
       </v-layout>
     </v-container>
+     <v-dialog v-model="isChange" fullscreen transition="dialog-bottom-transition" :overlay="false">
+        <v-card>
+            <v-toolbar dark color="primary">
+                <v-btn icon @click.native="closeDialog()" dark>
+                    <v-icon>close</v-icon>
+                </v-btn>
+                <v-toolbar-title><v-icon class="ki-icon-title-dialog">add_alert</v-icon>Enviar Aviso</v-toolbar-title>
+            </v-toolbar>
+            <solicitacao-mensagem></solicitacao-mensagem>
+        </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import MonitoramentoBarragensService from './services/monitoramento-barragens-service'
+import SolicitacaoMensagem from '../solicitacao-mensagem/SolicitacaoMensagem.vue'
 
 export default {
+  components: {
+    'solicitacao-mensagem': SolicitacaoMensagem
+  },
   data () {
     return {
       content: [],
@@ -211,8 +231,8 @@ export default {
     }
   },
   computed: {
-    isQueueExecution: function () {
-      return this.$store.getters['katalonModule/isQueueExecution']
+    isChange: function () {
+      return this.$store.getters['solicitacaoMensagemModule/isChangeSolicitacao']
     }
   },
   watch: {
@@ -245,7 +265,6 @@ export default {
   },
   created () {
     this.monitoramentoBarragensService = new MonitoramentoBarragensService(this.$http)
-    this.get(null);
   },
   methods: {
     get (refreshTime) {
@@ -257,7 +276,7 @@ export default {
         .getMonitoramentos(this.barragemSearch.id)
         .then(dados => {
           this.content = dados
-          this.barragem = `Monitoramento ${this.content.barragem.descricao}`
+          this.barragem = this.content.barragem.descricao
           this.minerioPrincipal = `Minério Principal ${this.content.barragem.minerioPrincipal.descricao}`
           this.danoPotencial = `Dano Potencial ${this.content.barragem.danoPotencial}`
           this.risco = `Risco ${this.content.barragem.risco}`
@@ -321,7 +340,18 @@ export default {
         default:
           return ''
       }
-    }
+    },
+    openDialog (item) {
+      if (item) {
+        this.projectSelected = item
+      } else {
+        this.projectSelected = null
+      }
+      this.$store.dispatch('solicitacaoMensagemModule/setChangeSolicitacao', { isChange: true })
+    },
+    closeDialog () {
+      this.$store.dispatch('solicitacaoMensagemModule/setChangeSolicitacao', { isChange: false })
+    },
   }
 }
 </script>
