@@ -13,4 +13,6 @@ import lombok.experimental.SuperBuilder;
 public class RelatorioBarragemDto extends BarragemDto {
 	
 	private MinerioDto minerioPrincipal;
+	
+	private MetodoConstrutivoDto metodoConstrutivo;
 }

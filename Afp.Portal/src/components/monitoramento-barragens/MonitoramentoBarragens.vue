@@ -1,13 +1,32 @@
 <template>
   <div>
     <h1 class="ki-title">Monitoramento de Barragens</h1>
-    <h2>{{title}}</h2>
-    <h3>{{subtitle}}</h3>
+    <div class="title font-weight-medium">{{barragem}}</div>
+    <div class="subtitle-1 font-weight-medium">{{minerioPrincipal}}</div>
+    <div :class="calculateColorDanoPotecial()">{{danoPotencial}}</div>
+    <div :class="calculateColorRisco()">{{risco}}</div>
+    <div class="subtitle-2 font-weight-medium">{{metodoConstrutivo}}</div>
+    <v-autocomplete
+        style="float: right; margin-top:-80px; margin-right:24px"
+        v-model="barragemSearch"
+        :items="barragens"
+        :loading="isLoadingSearchBarragem"
+        :search-input.sync="searchBarragens"
+        hide-no-data
+        hide-selected
+        item-text="descricao"
+        item-value="id"
+        label="Barragem"
+        clearable
+        placeholder="Comece a digitar para buscar"
+        prepend-icon="search"
+        return-object
+    ></v-autocomplete>
     <v-speed-dial
       open-on-hover
       direction="left"
       transition="slide-y-reverse-transition"
-      style=" float: right; margin-bottom: 16px !important; margin-top: -64px !important; margin-right: 16px !important;"
+      style="float: right; margin-bottom: 16px !important; margin-top: -32px !important; margin-right: 16px !important;"
     >
       <v-btn
         slot="activator"
@@ -66,9 +85,20 @@
         5min
       </v-btn>
     </v-speed-dial>
-    <div>
-      <apexchart type="line" :options="chartOptions" :series="series"></apexchart>
-    </div>
+    <v-container>
+        <v-layout>
+          <v-flex xs6>
+            <div>
+              <apexchart type="line" :options="chartOptionsDeslocamento" :series="seriesDeslocamento"></apexchart>
+            </div>
+          </v-flex>
+          <v-flex xs6>
+            <div>
+              <apexchart type="line" :options="chartOptionsVolume" :series="seriesVolume"></apexchart>
+            </div>
+          </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -80,10 +110,17 @@ export default {
     return {
       content: [],
       loading: true,
-      title: '',
-      subtitle: '',
+      barragem: '',
+      minerioPrincipal: '',
+      danoPotencial: '',
+      risco: '',
+      metodoConstrutivo: '',
+      isLoadingSearchBarragem: false,
+      searchBarragens: null,
+      barragemSearch: null,
+      barragens: [],
       timeToRefresh: 0,
-      chartOptions: {
+      chartOptionsDeslocamento: {
         annotations: {
             yaxis: []
         },
@@ -97,16 +134,23 @@ export default {
             blur: 10,
             opacity: 1
           },
-          id: 'monitoramento-barragens',
+          id: 'monitoramento-barragens-deslocamento',
           toolbar: {
             show: false
           }
         },
         stroke: {
-            curve: 'straight'
+            curve: 'smooth'
           },
         dataLabels: {
-          enabled: false,
+          enabled: true,
+        },
+        title: {
+          text: 'Deslocamento do Solo',
+          align: 'left'
+        },
+        markers: {
+          size: 6
         },
         xaxis: {
           categories: []
@@ -119,7 +163,51 @@ export default {
             offsetX: -5
           }
       },
-      series: []
+      chartOptionsVolume: {
+        annotations: {
+            yaxis: []
+        },
+        chart: {
+          type: 'line',
+          shadow: {
+            enabled: true,
+            color: '#000',
+            top: 18,
+            left: 7,
+            blur: 10,
+            opacity: 1
+          },
+          id: 'monitoramento-barragens-volume',
+          toolbar: {
+            show: false
+          }
+        },
+        stroke: {
+            curve: 'smooth'
+          },
+        dataLabels: {
+          enabled: true,
+        },
+        title: {
+          text: 'Volume',
+          align: 'left'
+        },
+        markers: {
+          size: 6
+        },
+        xaxis: {
+          categories: []
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right',
+            floating: true,
+            offsetY: -25,
+            offsetX: -5
+          }
+      },
+      seriesDeslocamento: [],
+      seriesVolume: []
     }
   },
   computed: {
@@ -133,6 +221,26 @@ export default {
       if (newValue > 0) {
         this.timer = setInterval(this.get, this.timeToRefresh)
       }
+    },
+    content () {
+      this.calculateColorDanoPotecial()
+    },  
+    searchBarragens (val) {
+      // Items have already been requested
+      if (this.isLoadingSearchBarragem) return
+      this.isLoadingSearchBarragem = true
+      // Lazily load input items
+      this.monitoramentoBarragensService.getBarragens({ 'descricao': val })
+        .then(res => {
+          this.barragens = res.content
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        .finally(() => (this.isLoadingSearchBarragem = false))
+    },
+    barragemSearch () {
+      this.get()
     }
   },
   created () {
@@ -146,52 +254,58 @@ export default {
         this.timeToRefresh = refreshTime
       }
       this.monitoramentoBarragensService
-        .getMonitoramentos()
+        .getMonitoramentos(this.barragemSearch.id)
         .then(dados => {
           this.content = dados
+          this.barragem = `Monitoramento ${this.content.barragem.descricao}`
+          this.minerioPrincipal = `Minério Principal ${this.content.barragem.minerioPrincipal.descricao}`
+          this.danoPotencial = `Dano Potencial ${this.content.barragem.danoPotencial}`
+          this.risco = `Risco ${this.content.barragem.risco}`
+          this.metodoConstrutivo = `Método Construtivo ${this.content.barragem.metodoConstrutivo.descricao}`
           this.series = []
-          this.title = `Monitoramento ${this.content.barragem.descricao}`
-          this.subtitle = `Minério Principal ${this.content.barragem.minerioPrincipal.descricao}`
-          this.chartOptions.annotations.yaxis = []
-          this.chartOptions.xaxis.categories = this.content.monitoramentos.map(a => new Date(a.dataInclusao).getTime())
+          this.chartOptionsVolume.annotations.yaxis = []
+          this.chartOptionsDeslocamento.annotations.yaxis = []
+          this.chartOptionsVolume.xaxis.categories = this.content.monitoramentos.map(a => new Date(a.dataInclusao).getTime())
+          this.chartOptionsDeslocamento.xaxis.categories = this.content.monitoramentos.map(a => new Date(a.dataInclusao).getTime())
 
-          this.chartOptions.annotations.yaxis.push({
-              y: this.content.barragem.volume,
-              borderColor: '#00E396',
-              label: {
-                borderColor: '#00E396',
-                style: {
-                  color: '#fff',
-                  background: '#00E396',
-                },
-                text: 'Volume',
-              }
-          })
-
-          this.series.push(
+          this.seriesDeslocamento.push(
           {
             name: 'Deslocamento Solo',
             data: this.content.monitoramentos.map(a => a.deslocamentoSolo)
           })
-          this.series.push({
+          this.seriesVolume.push({
             name: 'Volume Atual',
             data: this.content.monitoramentos.map(a => a.volumeAtual)
           })
           this.loading = false
         })
     },
-    calculateColor (item) {
-      switch (item.statusExecution) {
-        case 'QUEUED':
-          return 'blue lighten-1'
-        case 'EXECUTING':
-          return 'amber darken-2'
-        case 'SUCCESS':
-          return 'green'
-        case 'FAIL':
-          return 'red'
-        default:
-          return 'blue lighten-1'
+    calculateColorDanoPotecial () {
+      if (this.content && this.content.barragem){
+        switch (this.content.barragem.danoPotencial) {
+          case 'BAIXO':
+            return 'subtitle-2 blue--text text--lighten-1 font-weight-bold'
+          case 'MEDIO':
+            return 'subtitle-2 amber--text text--darken-2 font-weight-bold'
+          case 'ALTO':
+            return 'subtitle-2 red--text font-weight-bold'
+          case 'EXTREMO':
+            return 'subtitle-2 red--text text--accent-4 font-weight-bold'
+        }
+      }
+    },
+    calculateColorRisco () {
+      if (this.content && this.content.barragem){
+        switch (this.content.barragem.risco) {
+          case 'BAIXO':
+            return 'subtitle-2 blue--text text--lighten-1 font-weight-bold'
+          case 'MEDIO':
+            return 'subtitle-2 amber--text text--darken-2 font-weight-bold'
+          case 'ALTO':
+            return 'subtitle-2 red--text font-weight-bold'
+          case 'CRITICO':
+            return 'subtitle-2 red--text text--accent-4 font-weight-bold'
+        }
       }
     },
     showTimerSelected () {

@@ -45,7 +45,7 @@ public class BarragemController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
-	public Page<BarragemDto> GetAll(Pageable filtro) {
-		return barragemBusiness.getAll(filtro);
+	public Page<BarragemDto> GetAll(BarragemDto filter, Pageable filtro) {
+		return barragemBusiness.getAll(filter, filtro);
 	}
 }
