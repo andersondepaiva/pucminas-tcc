@@ -79,7 +79,7 @@
 				<groupId>com.heroku.sdk</groupId>
 				<artifactId>heroku-maven-plugin</artifactId>
 				<configuration>
-					<appName>sca-configserver</appName>
+					<appName>sca-discoveryserver</appName>
 					<includeTarget>false</includeTarget>
 					<includes>
 						<include>${basedir}/${full-artifact-name}</include>
