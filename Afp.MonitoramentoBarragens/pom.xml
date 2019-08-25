@@ -139,7 +139,11 @@
 				<artifactId>azure-webapp-maven-plugin</artifactId>
 				<version>1.6.0</version>
 				<configuration>
+					<authentication>
+			          <serverId>azure-auth</serverId>
+			        </authentication>
               		<appName>sca-pucminas-monitoramentobarragens</appName>
+              		<resourceGroup>tcc-pucminas</resourceGroup>
             	</configuration>
 			</plugin>
 			<plugin>

@@ -4,6 +4,15 @@
                           https://maven.apache.org/xsd/settings-1.0.0.xsd">
 	<servers>
 		<server>
+			<id>azure-auth</id>
+			<configuration>
+				<client>352c5646-1657-4839-992b-8ca5a4772f68</client>
+				<tenant>91d7f5a9-adcc-4c06-9d50-a8be23e94df1</tenant>
+				<key>8bf01725-0b55-4054-92bb-8378310f6a13</key>
+				<environment>AZURE</environment>
+			</configuration>
+		</server>
+		<server>
 			<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
 			<username>andersondepaiva92</username>
 			<!-- Treat this auth token like a password. Do not share it with anyone, 
