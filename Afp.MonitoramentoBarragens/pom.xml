@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
 	</properties>
 
 	<dependencies>
@@ -143,7 +144,7 @@
 					<includes>
 						<include>${basedir}/${full-artifact-name}</include>
 					</includes>
-					          <jdkVersion>1.8</jdkVersion>
+					<jdkVersion>1.8</jdkVersion>
 					<processTypes>
 						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
 					</processTypes>
