@@ -139,8 +139,13 @@
 				<artifactId>heroku-maven-plugin</artifactId>
 				<configuration>
 					<appName>sca-monitoramentobarragens</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>${basedir}/${full-artifact-name}</include>
+					</includes>
+					          <jdkVersion>1.8</jdkVersion>
 					<processTypes>
-						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
 					</processTypes>
 				</configuration>
 			</plugin>
