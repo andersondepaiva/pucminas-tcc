@@ -119,8 +119,10 @@
 	</repositories>
 
 	<distributionManagement>
-		<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
-		<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+		<repository>
+			<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
+			<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+		</repository>
 	</distributionManagement>
 
 	<build>
