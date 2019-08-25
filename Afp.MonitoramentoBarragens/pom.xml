@@ -138,7 +138,7 @@
 				<groupId>com.heroku.sdk</groupId>
 				<artifactId>heroku-maven-plugin</artifactId>
 				<configuration>
-					<appName>sca-pucminas-monitoramentobarragens</appName>
+					<appName>sca-monitoramentobarragens</appName>
 					<processTypes>
 						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
 					</processTypes>
