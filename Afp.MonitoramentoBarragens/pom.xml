@@ -138,6 +138,9 @@
 				<groupId>com.microsoft.azure</groupId>
 				<artifactId>azure-webapp-maven-plugin</artifactId>
 				<version>1.6.0</version>
+				<configuration>
+              		<appName>sca-pucminas-monitoramentobarragens</appName>
+            	</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
