@@ -106,7 +106,7 @@
 					</includes>
 					<jdkVersion>1.8</jdkVersion>
 					<processTypes>
-						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+						<web>java -Dserver.port=80 $JAVA_OPTS -jar ${full-artifact-name}</web>
 					</processTypes>
 				</configuration>
 			</plugin>
