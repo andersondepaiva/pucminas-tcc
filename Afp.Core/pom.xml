@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -106,6 +105,23 @@
 			<version>2.0.1.RELEASE</version>
 		</dependency>
 	</dependencies>
+	<repositories>
+		<repository>
+			<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
+			<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
+		<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+	</distributionManagement>
 
 	<build>
 		<plugins>

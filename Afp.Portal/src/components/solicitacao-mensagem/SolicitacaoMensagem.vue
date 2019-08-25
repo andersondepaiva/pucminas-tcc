@@ -54,7 +54,7 @@
               color="primary"
               id="btn_salvar"
             >
-              Save
+              Enviar
             </v-btn>
           </v-container>
         </v-card-actions>

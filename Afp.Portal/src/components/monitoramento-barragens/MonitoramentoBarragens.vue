@@ -281,7 +281,8 @@ export default {
           this.danoPotencial = `Dano Potencial ${this.content.barragem.danoPotencial}`
           this.risco = `Risco ${this.content.barragem.risco}`
           this.metodoConstrutivo = `Método Construtivo ${this.content.barragem.metodoConstrutivo.descricao}`
-          this.series = []
+          this.seriesDeslocamento = []
+          this.seriesVolume = []
           this.chartOptionsVolume.annotations.yaxis = []
           this.chartOptionsDeslocamento.annotations.yaxis = []
           this.chartOptionsVolume.xaxis.categories = this.content.monitoramentos.map(a => new Date(a.dataInclusao).getTime())
