@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -24,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Greenwich.M3</spring-cloud.version>
+		<full-artifact-name>target/${project.artifactId}-${project.version}.jar</full-artifact-name>
 	</properties>
 
 	<dependencies>
@@ -95,6 +95,21 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<configuration>
+					<appName>sca-configserver</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>${basedir}/${full-artifact-name}</include>
+					</includes>
+					<jdkVersion>1.8</jdkVersion>
+					<processTypes>
+						<web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
+					</processTypes>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
