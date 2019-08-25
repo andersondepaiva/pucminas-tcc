@@ -92,7 +92,24 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
+			<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<dependencyManagement>
+		<repository>
+			<id>dev-azure-com-andersondepaiva92-andersondepaiva92</id>
+			<url>https://pkgs.dev.azure.com/andersondepaiva92/_packaging/andersondepaiva92/maven/v1</url>
+		</repository>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
