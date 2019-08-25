@@ -135,16 +135,14 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.microsoft.azure</groupId>
-				<artifactId>azure-webapp-maven-plugin</artifactId>
-				<version>1.6.0</version>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
 				<configuration>
-					<authentication>
-			          <serverId>azure-auth</serverId>
-			        </authentication>
-              		<appName>sca-pucminas-monitoramentobarragens</appName>
-              		<resourceGroup>tcc-pucminas</resourceGroup>
-            	</configuration>
+					<appName>sca-pucminas-monitoramentobarragens</appName>
+					<processTypes>
+						<web>java $JAVA_OPTS -cp target/classes:target/dependency/* Main</web>
+					</processTypes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
