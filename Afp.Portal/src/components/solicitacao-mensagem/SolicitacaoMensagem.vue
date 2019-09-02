@@ -96,7 +96,7 @@ export default {
             this.initData()
             this.$store.dispatch('solicitacaoMensagemModule/destructor')
             this.$store.dispatch('snackBarModule/showMessageSuccess', {
-              text: 'Aviso disparado com sucesso'
+              text: 'Aviso inserido com sucesso, estamos alertando os contatos'
             })
           },
           () => {

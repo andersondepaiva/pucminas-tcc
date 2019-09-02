@@ -91,18 +91,12 @@
       </v-btn>
     </v-speed-dial>
     <v-container>
-        <v-layout>
-          <v-flex xs6>
-            <div>
-              <apexchart type="line" :options="chartOptionsDeslocamento" :series="seriesDeslocamento"></apexchart>
-            </div>
-          </v-flex>
-          <v-flex xs6>
-            <div>
-              <apexchart type="line" :options="chartOptionsVolume" :series="seriesVolume"></apexchart>
-            </div>
-          </v-flex>
-      </v-layout>
+      <div>
+        <apexchart type="line" :options="chartOptionsDeslocamento" :series="seriesDeslocamento"></apexchart>
+      </div>
+      <div>
+        <apexchart type="line" :options="chartOptionsVolume" :series="seriesVolume"></apexchart>
+      </div>
     </v-container>
      <v-dialog v-model="isChange" fullscreen transition="dialog-bottom-transition" :overlay="false">
         <v-card>
