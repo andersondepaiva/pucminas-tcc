@@ -37,8 +37,8 @@ namespace IdentityServer.Service
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("providers.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile($"providers.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName.ToLowerInvariant()}.json", optional: true)
+                .AddJsonFile($"providers.{env.EnvironmentName.ToLowerInvariant()}.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
