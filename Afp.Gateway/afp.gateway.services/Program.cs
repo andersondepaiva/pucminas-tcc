@@ -30,6 +30,7 @@ namespace afp.gateway.services
             {
                 config.SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
                 .AddJsonFile($"appsettings.json", true, true)
+                .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName.ToLower()}.json", optional: true)
                 .AddJsonFile($"{basePathOcelotConfig}ocelot.{hostingContext.HostingEnvironment.EnvironmentName.ToLower()}.json", false, true)
                 .AddEnvironmentVariables();
 
