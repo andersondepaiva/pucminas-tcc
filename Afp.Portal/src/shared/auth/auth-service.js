@@ -1,13 +1,10 @@
-/* import Vue from 'vue'
-import ConfigurationService from '../../components/configuration/services/configuration-service'
-import store from '../../store/index' */
 import Oidc from 'oidc-client'
 import Vue from 'vue'
 import store from '../../store/index'
-
+console.log('process.env.IDENTITY_SERVER', process.env.VUE_APP_IDENTITY_SERVER)
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
-  authority: 'http://localhost:5000',
+  authority: process.env.VUE_APP_IDENTITY_SERVER,
   client_id: 'sca-portal',
   redirect_uri: window.location.origin + '/callback',
   response_type: 'id_token token',

@@ -262,6 +262,9 @@ export default {
   },
   methods: {
     get (refreshTime) {
+      if (!this.barragemSearch)
+        return;
+
       this.loading = true
       if (refreshTime !== undefined && refreshTime !== null) {
         this.timeToRefresh = refreshTime

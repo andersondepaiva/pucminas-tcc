@@ -73,7 +73,8 @@ namespace afp.gateway.services
             // Identity
             .AddIdentityServerAuthentication("IdentityApiKey", x =>
             {
-                x.Authority = "http://localhost:5000";
+                var identityServerUrl = configuration.GetSection("IdentityUrl").Value;
+                x.Authority = identityServerUrl;
                 x.SupportedTokens = SupportedTokens.Both;
                 x.RequireHttpsMetadata = false;
             });

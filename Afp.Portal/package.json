@@ -1,5 +1,5 @@
 {
-  "name": "afp-portal",
+  "name": "sca-portal",
   "version": "0.1.0",
   "private": true,
   "description": "Portal SCA",
@@ -7,6 +7,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "node server.js",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
