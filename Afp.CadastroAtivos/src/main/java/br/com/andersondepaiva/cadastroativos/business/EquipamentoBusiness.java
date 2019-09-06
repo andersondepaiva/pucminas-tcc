@@ -12,23 +12,8 @@ import br.com.andersondepaiva.core.business.Business;
 @Service
 public class EquipamentoBusiness extends Business<Equipamento, String, EquipamentoDto> implements IEquipamentoBusiness {
 
-	/*@Autowired
-	private IProfissaoProducer profissaoProducer;*/
-
 	@Autowired
 	public EquipamentoBusiness(IEquipamentoRepository baseRepository) {
 		super(baseRepository);
 	}
-
-	/*@Override
-	public EquipamentoDto save(EquipamentoDto dto) throws ReflectiveOperationException {
-		isValid(dto);
-
-		EquipamentoDto dtoPersisted = super.save(dto);
-
-		/*profissaoProducer.sendMessage(profissaoProducer.profissaoExchange().getName(),
-				profissaoProducer.getRoutingKeyEventCreate(), dtoPersisted);
-
-		return dtoPersisted;
-	}*/
 }
