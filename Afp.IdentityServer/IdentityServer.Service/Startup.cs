@@ -8,6 +8,7 @@ using IdentityServer.Infra.IoC;
 using IdentityServer.Infra.IoC.Extensions;
 using IdentityServer.Service.Configuration;
 using IdentityServer.Swagger;
+using IdentityServer4.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -106,6 +107,8 @@ namespace IdentityServer.Service
                 });
             });
 
+            services.AddSingleton<ICorsPolicyService, CorsPolicyService>();
+
             var builder = new ContainerBuilder();
             builder.Populate(services);
             builder.RegisterModule(new DependencyInjectionResolver());
@@ -124,13 +127,14 @@ namespace IdentityServer.Service
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseCors(opt =>
+            app.UseCors("default");
+
+            app.Use(async (context, next) =>
             {
-                opt.AllowAnyOrigin();
-                opt.AllowAnyMethod();
-                opt.AllowAnyHeader();
-                opt.AllowCredentials();
+                context.Request.Scheme = "https";
+                await next.Invoke();
             });
+
             app.UseIdentityServer();
             app.UseAuthentication();
 
