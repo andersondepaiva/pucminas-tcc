@@ -5,15 +5,6 @@
     "FacebookProviders": [
     ],
     "OpenIdProviders": [
-      {
-        "Code": "SCA",
-        "DisplayName": "SCA PucMinas",
-        "AuthenticationScheme": "azure-ad-pucminas",
-        "Authority": "https://login.microsoftonline.com/91d7f5a9-adcc-4c06-9d50-a8be23e94df1",
-        "ClientId": "4a87d2b1-b914-4d2e-92e8-d553dd6654f2",
-        "ClientSecret": "i@PvYEhbYkqcl1.r1tO*[7Slao1Bsbqv",
-        "Scopes": [ "openid", "profile" ]
-      }
     ]
   }
 }
