@@ -3,11 +3,12 @@
     {
       "UpstreamPathTemplate": "/api/cadastro-ativos/{everything}",
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "Priority": 0,
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://sca-cadastroativos.herokuapp.com"
+          "Host": "sca-cadastroativos.herokuapp.com",
+          "Port": 443
         }
       ],
       "AuthenticationOptions": {
@@ -20,11 +21,12 @@
     {
       "UpstreamPathTemplate": "/api/seguranca-comunicacao/{everything}",
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "Priority": 0,
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://sca-segurancacomunicacao.herokuapp.com"
+          "Host": "sca-segurancacomunicacao.herokuapp.com",
+          "Port": 443
         }
       ],
       "AuthenticationOptions": {
@@ -37,11 +39,12 @@
     {
       "UpstreamPathTemplate": "/api/monitoramento-barragens/{everything}",
       "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "Priority": 0,
       "DownstreamHostAndPorts": [
         {
-          "Host": "https://sca-monitoramentobarragens.herokuapp.com"
+          "Host": "sca-monitoramentobarragens.herokuapp.com",
+          "Port": 443
         }
       ],
       "AuthenticationOptions": {
